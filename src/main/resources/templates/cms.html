@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> 
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 p-2 navbar-light bg-light rounded-3">
+               
+        <div class="d-flex bd-highlight mb-3">
+
+            <div class="mx-auto p-2 bd-highlight"><div id="menu">
+                <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+                </div>
+                <nav class="nav" id="nav">
+                  <ul>
+                                        <li><a th:href="@{/post/posthome}" ><i class="fa-solid fa-browser"></i> home</a></li>
+
+                    <li><a th:href="@{/post/cms}" ><i class="fa-solid fa-browser"></i> Profile</a></li>
+                    
+                    <li><a th:href="@{/post/addpost}">Add Post</a></li>
+                    
+                    <li><a th:href="@{/post/postslist}">Post Lists</a></li>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                  </ul>
+                </nav> 
+              </div>
+              
+              <div class="menu-bg" id="menu-bg"></div>
+            </div>
+              <div>
+                <a class="bd-highlight btn btn-outline-primary" id="buttons" th:href="@{/logout}">logout</a>
+
+              </div>
+
+        </div>
+            </div>
+        </div>
+
+        <div class="row">
+			
+			<div class="col-md-2"></div>
+      <div class="col-md-7 offset-md-1 my-2 h-100 d-inline-block ">
+        	
+        	
+        	<div class="container" id="show_profile">
+    <div class="main-body">
+    
+        
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3" th:each="y:${user}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img th:src="@{'https://avatars.dicebear.com/api/'+${y.gender}+'/:'+${y.username}+'.svg'}" alt="Admin" class="rounded-circle" width="150">
+
+                    <div class="mt-3">
+                      <h4></h4>
+                 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                 <div class="row" th:each="i:${user}">
+                 	
+                   	
+                 	
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Id</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" th:text="${i.id}" >
+                    </div>
+                  </iv>
+                <hr/>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" th:text="${i.username}">
+                     
+                    </div>
+                  </div>
+                  <hr/>
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Gender</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" th:text="${i.gender}">
+                    
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary" th:text="${i.email}">
+                    </div>
+                  </div>
+                  <hr>
+                  
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-info" type="submit" id="buttons" th:href="@{/post/edit}"onclick="e()">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+        	
+<!-- ************************************** -->        	
+        
+       
+        </div>
+
+        </div>
+        
+       
+</div>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+
+function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
+  }
+
+
+</script>

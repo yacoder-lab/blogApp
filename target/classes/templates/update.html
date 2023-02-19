@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Post</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+ <link rel="stylesheet" th:href="@{/css/style.css}">
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<body>
+ <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 p-2 navbar-light bg-light rounded-3">
+               
+        <div class="d-flex bd-highlight mb-3">
+
+            <div class="mx-auto p-2 bd-highlight"><div id="menu">
+                <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+                </div>
+                <nav class="nav" id="nav">
+                  <ul>
+                    <li><a th:href="@{/post/cms}">Profile</a></li>
+                    <li><a th:href="@{/post/addpost}">Add Post</a></li>
+                    <li><a th:href="@{/post/postslist}">Post Lists</a></li>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                  </ul>
+                </nav> 
+              </div>
+              
+              <div class="menu-bg" id="menu-bg"></div>
+            </div>
+              <div>
+                <a class="bd-highlight btn btn-outline-primary" id="buttons" th:href="@{/logout}">logout</a>
+
+              </div>
+
+        </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+<div class="col-md-2"></div>
+            <div class="col-md-7 offset-md-2 my-2">
+              <form th:action="@{/post/update-process}" th:object="${post}" method="post">
+               <input type="text" name="id" id="id" class="form-control my-3 py-2" placeholder="Your Id" th:value="${post.id}" readonly>
+              
+              <input type="text" name="title" id="title" class="form-control my-3 py-2" placeholder="Enter Title" th:value="${post.title}">
+                              <small>Write More than 10 Words </small>
+
+                <input name="content" id="editor"  rows="4" cols="60" class="ck-editor__editable_inline"  th:value="${post.content}">
+                </input>
+                <small>Write More than 20 Words </small>
+                
+                <div class="form-check form-switch my-3">
+
+  			<input class="form-check-input fs-3" name="publish" type="checkbox" role="switch" th:checked=${post.publish} id="flexSwitchCheckChecked">
+  			
+  			
+  			
+  			<label class="form-check-label fs-3" for="flexSwitchCheckChecked">publish</label>
+                
+                   <button type="submit" class="btn btn-primary m-2">Update</button>
+
+                <button type="reset" class="btn btn-success m-2">reset</button>
+                </div>
+             
+
+            </form>
+          </div>
+        </div>
+        </div>
+
+
+</body>
+</html >
+<script>
+tinymce.init({
+        selector: '#editor'
+      });
+
+</script>
+
+<script >function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
+  }
+
+</script>

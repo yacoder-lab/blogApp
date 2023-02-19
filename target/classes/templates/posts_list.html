@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Post Lists</title>
+</head>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-md-12 p-2 navbar-light bg-light rounded-3">
+
+				<div class="d-flex bd-highlight mb-3">
+
+					<div class="mx-auto p-2 bd-highlight">
+						<div id="menu">
+							<div id="menu-bar" onclick="menuOnClick()">
+								<div id="bar1" class="bar"></div>
+								<div id="bar2" class="bar"></div>
+								<div id="bar3" class="bar"></div>
+							</div>
+							<nav class="nav" id="nav">
+								<ul>
+									<li><a th:href="@{/post/posthome}">Home</a></li>
+
+									<li><a th:href="@{/post/cms}">Profile</a></li>
+									<li><a th:href="@{/post/addpost}">Add Post</a></li>
+									<li><a th:href="@{/post/postslist}">Post Lists</a></li>
+									<li><a th:href="@{/logout}">Logout</a></li>
+								</ul>
+							</nav>
+						</div>
+
+						<div class="menu-bg" id="menu-bg"></div>
+					</div>
+					<div>
+						<a class="bd-highlight btn btn-outline-primary" id="buttons" th:href="@{/logout}">logout</a>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-7 offset-md-2">
+				<div class="card my-3" th:each="i: ${user}">
+					<div class="form-check form-switch my-3">
+
+						<input class="form-check-input fs-3" name="publish" type="checkbox" th:checked=${i.publish} role="switch"
+							id="flexSwitchCheckChecked">
+						<p class="my-2 fw-bold">Distribute (Public Your Post)</p >
+
+					</div>
+
+					<div class="card-body">
+						<h5 class="card-title" th:text="${i.title}"></h5>
+						<p class="card-text text-truncate d-inline-block" th:utext="${i.content}"></p>
+
+						<a class="btn btn-primary" id="delete" th:onclick="|clickdelete('${i.id}')|">Delete</a>
+						
+						
+						<form th:action="@{'/post/update/'+${i.id}}" method="post">
+						
+						<button class="btn btn-success" type="submit">Edit</button>
+
+						</form >
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+
+
+</body>
+
+</html>
+<script>function menuOnClick() {
+		document.getElementById("menu-bar").classList.toggle("change");
+		document.getElementById("nav").classList.toggle("change");
+		document.getElementById("menu-bg").classList.toggle("change-bg");
+	}
+
+
+	function clickdelete(id) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+
+		}).then((result) => {
+			if (result.isConfirmed) {
+				
+				window.location.href= "/post/" + id;
+				
+
+				Swal.fire(
+					'Deleted!',
+					'Your Blog has been deleted.',
+					'success',
+				)
+
+				window.location.reload();
+
+
+
+			}
+			window.location = "/post/postslist";
+		})
+	}
+
+
+</script>
